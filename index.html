@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>जन्मदिन का अनोखा सरप्राइज</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@500;700&display=swap" rel="stylesheet">
-    
     <style>
         body {
             font-family: 'Baloo Bhai 2', cursive;
@@ -20,17 +17,16 @@
             padding: 20px;
             overflow: hidden;
         }
-
-        /* --- कंफ़ेद्दी एनिमेशन --- */
         .confetti { position: fixed; width: 15px; height: 15px; background-color: #f2d74e; opacity: 0; animation: confetti-fall 5s ease-in-out infinite; }
         .confetti.c2 { background-color: #f24e4e; }
         .confetti.c3 { background-color: #4ef2a5; }
         .confetti.c4 { background-color: #4e7ef2; }
-        @keyframes confetti-fall { 0% { opacity: 1; transform: translateY(-100vh) rotateZ(0deg); } 100% { opacity: 1; transform: translateY(100vh) rotateZ(720deg); } }
-
+        @keyframes confetti-fall {
+            0% { opacity: 1; transform: translateY(-100vh) rotateZ(0deg); }
+            100% { opacity: 1; transform: translateY(100vh) rotateZ(720deg); }
+        }
         .screen {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(4px);
             max-width: 450px;
             width: 100%;
             padding: 30px;
@@ -39,23 +35,16 @@
             text-align: center;
             border: 3px solid #fff;
         }
-
-        /* --- इनपुट स्क्रीन स्टाइल --- */
-        #input-screen { border-image: linear-gradient(45deg, #f72585, #7209b7, #3a0ca3, #4361ee, #4cc9f0) 1; }
         #input-screen h1 { color: #f72585; margin-bottom: 25px; font-size: 2.2em; }
         .input-group { margin-bottom: 20px; text-align: left; }
         .input-group label { display: block; margin-bottom: 8px; color: #555; font-weight: 700; }
-        .input-field { width: calc(100% - 24px); padding: 12px; border: 2px solid #ffb3c1; border-radius: 10px; font-size: 1em; font-family: 'Baloo Bhai 2', cursive; }
-        .input-field:focus { outline: none; border-color: #f72585; box-shadow: 0 0 8px rgba(247, 37, 133, 0.3); }
-        .create-button { background: linear-gradient(45deg, #f72585, #b5179e); color: white; padding: 15px 30px; border: none; border-radius: 50px; font-size: 1.2em; cursor: pointer; font-weight: 700; transition: all 0.3s ease; letter-spacing: 1px; }
-        .create-button:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
-
-        /* --- विश स्क्रीन स्टाइल --- */
+        .input-field { width: calc(100% - 24px); padding: 12px; border: 2px solid #ffb3c1; border-radius: 10px; font-size: 1em; }
+        .create-button { background: linear-gradient(45deg, #f72585, #b5179e); color: white; padding: 15px 30px; border: none; border-radius: 50px; font-size: 1.2em; cursor: pointer; font-weight: 700; }
         #wish-screen { display: none; }
-        .scene-container { position: relative; height: 400px; margin-bottom: 15px; border: 10px solid; border-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet) 1; border-image-slice: 1; padding: 10px; background: #fff8e1; }
+        .scene-container { position: relative; height: 400px; margin-bottom: 15px; padding: 10px; background: #fff8e1; }
         .table-img { position: absolute; bottom: 0; left: 0; width: 100%; z-index: 1; }
         .cake-img { position: absolute; bottom: 70px; left: 50%; width: 160px; transform: translateX(-50%); z-index: 2; }
-        #birthday-boy-name-display { position: absolute; top: 10px; width: 100%; font-size: 2.5em; font-weight: 700; color: #d90429; text-shadow: 2px 2px 5px rgba(255,255,255,0.8); z-index: 5; opacity: 0; }
+        #birthday-boy-name-display { position: absolute; top: 10px; width: 100%; font-size: 2.5em; font-weight: 700; color: #d90429; z-index: 5; opacity: 0; }
         #gift-box { position: absolute; bottom: 80px; left: 5%; width: 120px; z-index: 3; cursor: pointer; transition: transform 0.3s; }
         #gift-box.shake { animation: shake 0.8s ease-in-out; }
         #girl-image-container { position: absolute; bottom: 80px; left: 0; width: 220px; z-index: 4; opacity: 0; transition: opacity 1s, transform 1s; }
@@ -64,52 +53,44 @@
         #still-girl { opacity: 1; } #talking-girl { opacity: 0; }
         .wish-message { font-size: 1.6em; color: #d90429; font-weight: 700; opacity: 0; }
         .from-message { font-size: 1em; color: #333; margin-top: 5px; opacity: 0; }
-        
         #play-button-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; }
-        #play-button { font-size: 1.5em; padding: 25px 40px; border-radius: 50px; border: 3px solid white; background: linear-gradient(45deg, #f72585, #b5179e); color: white; cursor: pointer; animation: pulse 2s infinite; font-family: 'Baloo Bhai 2', cursive; }
-        
+        #play-button { font-size: 1.5em; padding: 25px 40px; border-radius: 50px; border: 3px solid white; background: linear-gradient(45deg, #f72585, #b5179e); color: white; cursor: pointer; }
         @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-8deg); } 75% { transform: rotate(8deg); } }
         @keyframes popIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
-        @keyframes pulse { 0% { transform: scale(0.95); } 70% { transform: scale(1.05); } 100% { transform: scale(0.95); } }
     </style>
 </head>
 <body>
     <div id="confetti-container"></div>
-
     <div id="input-screen" class="screen">
         <h1>🎂 जन्मदिन का सरप्राइज बनाएं 🎂</h1>
         <div class="input-group">
             <label for="birthdayBoyName">जिसका जन्मदिन है, उसका नाम:</label>
-            <input type="text" id="birthdayBoyName" class="input-field" placeholder="जैसे - राहुल, अमित, आदि।">
+            <input type="text" id="birthdayBoyName" class="input-field" placeholder="राहुल">
         </div>
         <div class="input-group">
             <label for="senderName">आपका नाम (भेजने वाले):</label>
-            <input type="text" id="senderName" class="input-field" placeholder="जैसे - रवि, सुमित, आदि।">
+            <input type="text" id="senderName" class="input-field" placeholder="रवि">
         </div>
-        <button id="createWishBtn" class="create-button">🎉 शुभकामना लिंक बनाएं</button>
+        <button id="createWishBtn" class="create-button">🎉 शुभकामना बनाएं</button>
     </div>
-
     <div id="wish-screen" class="screen">
         <div id="play-button-overlay">
             <button id="play-button">🎁 Start Surprise 🎁</button>
         </div>
         <div class="scene-container">
-            <!-- नए इमेज लिंक -->
-            <img class="table-img" src="https://i.ibb.co/JqjTzYx/table.png" alt="Table">
-            <img class="cake-img" src="https://i.ibb.co/yQjJ1yM/cake.png" alt="Cake">
+            <img class="table-img" src="https://i.imgur.com/OjpUNCE.png" alt="Table">
+            <img class="cake-img" src="https://i.imgur.com/WnQ9LGE.png" alt="Cake">
             <h2 id="birthday-boy-name-display"></h2>
-            <img id="gift-box" src="https://i.ibb.co/sKk2x22/gift.png" alt="Gift Box">
+            <img id="gift-box" src="https://i.imgur.com/8iW9pG8.png" alt="Gift Box">
             <div id="girl-image-container">
-                <img id="still-girl" class="girl-image" src="https://i.ibb.co/WcWzJ7n/girl-still.png" alt="Girl with gift">
-                <img id="talking-girl" class="girl-image" src="https://i.ibb.co/tZsm1D1/girl-talk.gif" alt="Talking Girl">
+                <img id="still-girl" class="girl-image" src="https://i.imgur.com/Y2y1IQJ.png" alt="Girl Still">
+                <img id="talking-girl" class="girl-image" src="https://i.imgur.com/XVRT4Ey.gif" alt="Girl Talking">
             </div>
         </div>
         <h3 id="wishText" class="wish-message"></h3>
         <p id="fromText" class="from-message"></p>
     </div>
-
     <script>
-        // Confetti Logic
         const confettiContainer = document.getElementById('confetti-container');
         for (let i = 0; i < 50; i++) {
             const confetti = document.createElement('div');
@@ -119,13 +100,11 @@
             confetti.style.animationDelay = Math.random() * 5 + 's';
             confettiContainer.appendChild(confetti);
         }
-
         const inputScreen = document.getElementById('input-screen');
         const wishScreen = document.getElementById('wish-screen');
         const createWishBtn = document.getElementById('createWishBtn');
         const birthdayBoyNameInput = document.getElementById('birthdayBoyName');
         const senderNameInput = document.getElementById('senderName');
-        
         const bdayBoyNameDisplay = document.getElementById('birthday-boy-name-display');
         const wishTextElement = document.getElementById('wishText');
         const fromTextElement = document.getElementById('fromText');
@@ -138,9 +117,7 @@
 
         function speakMessage(message) {
             if ('speechSynthesis' in window) {
-                // पहले से चल रही आवाज़ को रोकें
                 window.speechSynthesis.cancel(); 
-                
                 const utterance = new SpeechSynthesisUtterance(message);
                 utterance.lang = 'hi-IN';
                 utterance.rate = 0.9;
@@ -169,30 +146,20 @@
         function startAnimationAndAudio(toName, fromName) {
             const decodedToName = decodeURIComponent(toName);
             const decodedFromName = decodeURIComponent(fromName);
-
-            // 1. लड़के का नाम दिखाएं
             bdayBoyNameDisplay.innerText = decodedToName;
             bdayBoyNameDisplay.style.animation = 'popIn 1s ease-out forwards';
-
-            // 2. गिफ्ट बॉक्स हिलाएं
             setTimeout(() => giftBox.classList.add('shake'), 1000);
-
-            // 3. गिफ्ट खुले और लड़की बाहर आए
             setTimeout(() => {
                 giftBox.style.transition = 'transform 0.5s';
                 giftBox.style.transform = 'scale(0)';
                 girlImageContainer.classList.add('reveal');
             }, 2000);
-
-            // 4. ऑडियो और टेक्स्ट शुरू करें
             setTimeout(() => {
                 wishTextElement.innerText = `जन्मदिन मुबारक हो, ${decodedToName}! 🥳`;
-                fromTextElement.innerText = `ये सरप्राइज आपके दोस्त ${decodedFromName} ने भेजा है!`;
-                
+                fromTextElement.innerText = `यह शुभकामना आपके दोस्त ${decodedFromName} ने भेजी है!`;
                 wishTextElement.style.animation = 'popIn 0.5s ease-out forwards';
                 fromTextElement.style.animation = 'popIn 0.5s ease-out 0.5s forwards';
-                
-                const messageToSpeak = `Happy Birthday, ${decodedToName}! Mujhe aapke dost ${decodedFromName} ne aapko wish karne ke liye bheja hai. Enjoy your day!`;
+                const messageToSpeak = `${decodedToName}, आपको जन्मदिन की बहुत-बहुत शुभकामनाएं! मुझे आपके दोस्त ${decodedFromName} ने भेजा है, ताकि मैं आपको विश कर सकूं।`;
                 speakMessage(messageToSpeak);
             }, 3000);
         }
@@ -201,14 +168,13 @@
             const toName = birthdayBoyNameInput.value.trim();
             const fromName = senderNameInput.value.trim();
             if (!toName || !fromName) return alert('कृपया दोनों नाम भरें।');
-
             const shareUrl = `${window.location.origin}${window.location.pathname}?to=${encodeURIComponent(toName)}&from=${encodeURIComponent(fromName)}`;
-            const shareText = `🎁 *${fromName}* की तरफ से तुम्हारे लिए एक खास बर्थडे सरप्राइज है, *${toName}*! \n\nइसे खोलने के लिए नीचे दिए लिंक पर क्लिक करो 👇\n\n${shareUrl}`;
-
+            const shareText = `🎁 ${fromName} की तरफ से तुम्हारे लिए एक खास बर्थडे सरप्राइज है, ${toName}!
+👇 लिंक खोलो 👇\n${shareUrl}`;
             if (navigator.share) {
-                navigator.share({ title: 'A Special Birthday Wish!', text: shareText }).catch(console.error);
+                navigator.share({ title: '🎉 Birthday Surprise', text: shareText }).catch(console.error);
             } else {
-                navigator.clipboard.writeText(shareText).then(() => alert('शेयर करने का ऑप्शन उपलब्ध नहीं है। शुभकामना संदेश कॉपी हो गया है, आप इसे कहीं भी पेस्ट कर सकते हैं।'));
+                navigator.clipboard.writeText(shareText).then(() => alert('लिंक कॉपी हो गया है, अब इसे भेजें।'));
             }
         });
     </script>
